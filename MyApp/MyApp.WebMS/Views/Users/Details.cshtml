@@ -1,0 +1,93 @@
+﻿@model MyApp.WebMS.Models.UserListItemViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>User Details</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Forename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Forename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+    </dl>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>UserId</th>
+                    <th>LogType</th>
+                    <th>TimeStamp</th>
+                    <th style="width: 1px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.LogEntryItems)
+                {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>
+                            @item.UserId
+                        </td>
+                        <td>
+                            @item.LogEntryType
+                        </td>
+                        <td>
+                            @item.TimeStamp.ToString("dd/MM/yyyy HH:mm:ss.fff")
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<p>
+    <a href="@Url.RouteUrl("UserList")" class="btn btn-default">Back To List</a>
+    <a href="@Url.RouteUrl("Home")" class="btn btn-default">Back To Start</a>
+</p>

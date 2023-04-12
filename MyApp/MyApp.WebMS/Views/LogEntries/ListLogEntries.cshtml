@@ -1,0 +1,79 @@
+﻿@model MyApp.WebMS.Models.LogEntryListViewModel
+
+<h2>Log Entries List</h2>
+
+<div class="panel panel-default">
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>User Id</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Log Entry Type</th>
+                    <th>Time Stamp</th>
+                    <th style="width: 1px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>
+                            @item.UserId
+                        </td>
+                        <td>
+                            @item.Fullname
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @item.LogEntryType
+                        </td>
+                        <td>
+                            @item.TimeStamp.ToString("dd/MM/yyyy HH:mm:ss.fff")
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+@using (Html.BeginForm("ListFilteredLogEntries", "logentries", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.SearchFullname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.SearchFullname, new { @class = "form-control col-md-2", placeholder = "Enter full name to search" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SearchEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.SearchEmail, new { @class = "form-control col-md-2", placeholder = "Enter email to search" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SearchLogType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.SearchLogType, new { @class = "form-control col-md-2", placeholder = "Enter log type to search" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

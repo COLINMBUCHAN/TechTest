@@ -1,0 +1,72 @@
+﻿@model MyApp.WebMS.Models.UserListViewModel
+
+<h2>User List</h2>
+
+<div class="panel panel-default">
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Forename</th>
+                    <th>Surname</th>
+                    <th>Date Of Birth</th>
+                    <th>Email</th>
+                    <th>Account Active</th>
+                    <th style="width: 1px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>
+                            @item.Forename
+                        </td>
+                        <td>
+                            @item.Surname
+                        </td>
+                        <td>
+                            @item.DateOfBirth.ToString("dd/MM/yyyy")
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @(item.IsActive ? "Yes" : "No")
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Actions
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.RouteUrl("ViewUser", new { id = item.Id })">View</a></li>
+                                    <li><a href="@Url.RouteUrl("EditUser", new { id = item.Id })">Edit</a></li>
+                                    <li><a href="@Url.RouteUrl("DeleteUser", new { id = item.Id })">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel-footer">
+        <div class="btn-group" role="group">
+            <a href="@Url.RouteUrl("UserList")" class="btn btn-default">Show All</a>
+            <a href="@Url.RouteUrl("UserList", new { WhetherActive = true })" class="btn btn-default">Active Only</a>
+            <a href="@Url.RouteUrl("UserList", new { WhetherActive = false })" class="btn btn-default">Non Active</a>
+        </div>
+
+        <a href="@Url.RouteUrl("AddUser")" class="btn btn-primary pull-right">
+            <span class="glyphicon glyphicon-plus"></span> Add User
+        </a>
+    </div>
+</div>
